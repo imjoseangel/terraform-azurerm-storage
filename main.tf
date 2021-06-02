@@ -18,6 +18,7 @@ data "azurerm_resource_group" "rgrp" {
 }
 
 resource "azurerm_resource_group" "rg" {
+  #ts:skip=accurics.azure.NS.272 RSG lock should be skipped for now.
   count    = var.create_resource_group ? 1 : 0
   name     = lower(var.resource_group_name)
   location = var.location
@@ -40,6 +41,7 @@ resource "azurerm_storage_account" "storeacc" {
   account_kind              = var.account_kind
   account_tier              = local.account_tier
   account_replication_type  = local.account_replication_type
+  min_tls_version           = "TLS1_2"
   enable_https_traffic_only = true
   allow_blob_public_access  = var.enable_advanced_threat_protection == true ? true : false
   tags                      = merge({ "ResourceName" = format("sta%s%s", lower(replace(var.storage_account_name, "/[[:^alnum:]]/", "")), random_string.unique.result) }, var.tags, )
@@ -62,46 +64,8 @@ resource "azurerm_storage_account" "storeacc" {
   }
 }
 
-# resource "azurerm_template_deployment" "storeacc" {
-#   name                = azurerm_storage_account.storeacc.name
-#   resource_group_name = local.resource_group_name
-#   deployment_mode     = "Incremental"
-#   parameters = {
-#     "storageAccount" = azurerm_storage_account.storeacc.name
-#   }
-
-#   template_body = <<DEPLOY
-#         {
-#             "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-#             "contentVersion": "1.0.0.0",
-#             "parameters": {
-#                 "storageAccount": {
-#                     "type": "string",
-#                     "metadata": {
-#                         "description": "Storage Account Name"}
-#                 }
-#             },
-#             "variables": {},
-#             "resources": [
-#                 {
-#                     "type": "Microsoft.Storage/storageAccounts/blobServices",
-#                     "apiVersion": "2019-06-01",
-#                     "name": "[concat(parameters('storageAccount'), '/default')]",
-#                     "properties": {
-#                         "IsVersioningEnabled": true
-#                     }
-#                 }
-#             ]
-#         }
-#     DEPLOY
-
-#   depends_on = [
-#     azurerm_storage_account.storeacc,
-#   ]
-# }
-
 #--------------------------------------
-# Storage Advanced Threat Protection 
+# Storage Advanced Threat Protection
 #--------------------------------------
 resource "azurerm_advanced_threat_protection" "atp" {
   target_resource_id = azurerm_storage_account.storeacc.id
