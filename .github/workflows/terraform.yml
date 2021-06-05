@@ -55,7 +55,7 @@ jobs:
     #   with:
     #     sarif_file: tfsec.sarif
 
-    # CStatic code analyzer for Infrastructure as Code
+    # Static code analyzer for Infrastructure as Code
     - name: Lint Code Base
       id: superlinter
       uses: github/super-linter@v3
@@ -66,6 +66,7 @@ jobs:
         VALIDATE_TERRAFORM: true
         VALIDATE_TERRAFORM_TERRASCAN: false
 
+    # Static code analyzer for Terrascan
     - name: Terraform Scan Code Base
       id: terrascan
       uses: accurics/terrascan-action@v1
