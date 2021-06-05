@@ -55,8 +55,9 @@ jobs:
     #   with:
     #     sarif_file: tfsec.sarif
 
-    # CStatic code analyzer for Infrastructure as Code with terrascan.
-    - name: Terraform Scan Code Base
+    # CStatic code analyzer for Infrastructure as Code
+    - name: Lint Code Base
+      id: superlinter
       uses: github/super-linter@v3
       env:
         VALIDATE_ALL_CODEBASE: true
@@ -64,3 +65,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VALIDATE_TERRAFORM: true
         VALIDATE_TERRAFORM_TERRASCAN: false
+
+    - name: Terraform Scan Code Base
+      id: terrascan
+      uses: accurics/terrascan-action@v1
+      with:
+        iac_type: terraform
+        iac_version: v14
+        policy_type: azure
+        only_warn: false
