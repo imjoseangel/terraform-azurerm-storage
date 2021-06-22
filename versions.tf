@@ -8,5 +8,5 @@ terraform {
       source = "hashicorp/random"
     }
   }
-  required_version = ">= 0.15"
+  required_version = ">= 1.0"
 }
