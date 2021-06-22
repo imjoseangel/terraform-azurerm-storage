@@ -10,7 +10,7 @@ This Terraform module deploys a Storage Account on Azure.
 
 * Name Convention specified as `sa<string><randomstring>. <randomstring>` is calculated with `random_string` resource.
 
-## Usage in Terraform 0.15
+## Usage in Terraform 1.0
 
 ```terraform
 module "storage" {
