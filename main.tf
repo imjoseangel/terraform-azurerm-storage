@@ -35,7 +35,7 @@ resource "random_string" "unique" {
 }
 
 resource "azurerm_storage_account" "storeacc" {
-  name                      = format("st%s%s", lower(replace(var.storage_account_name, "/[[:^alnum:]]/", "")), random_string.unique.result)
+  name                      = var.storage_account_name
   resource_group_name       = local.resource_group_name
   location                  = local.location
   account_kind              = var.account_kind
@@ -44,7 +44,7 @@ resource "azurerm_storage_account" "storeacc" {
   min_tls_version           = "TLS1_2"
   enable_https_traffic_only = true
   allow_blob_public_access  = var.enable_advanced_threat_protection == true ? true : false
-  tags                      = merge({ "ResourceName" = format("sta%s%s", lower(replace(var.storage_account_name, "/[[:^alnum:]]/", "")), random_string.unique.result) }, var.tags, )
+  tags                      = var.tags
 
   blob_properties {
     versioning_enabled = true
