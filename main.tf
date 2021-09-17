@@ -28,6 +28,7 @@ resource "azurerm_resource_group" "rg" {
 #---------------------------------------------------------
 # Storage Account Creation or selection
 #----------------------------------------------------------
+#tfsec:ignore:AZU012
 resource "azurerm_storage_account" "storeacc" {
   name                      = var.storage_account_name
   resource_group_name       = local.resource_group_name
