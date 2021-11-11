@@ -1,6 +1,6 @@
 # terraform-azurerm-storage
 
-[![Terraform](https://github.com/visma-raet/terraform-azurerm-storage/actions/workflows/terraform.yml/badge.svg)](https://github.com/visma-raet/terraform-azurerm-storage/actions/workflows/terraform.yml)
+[![Terraform](https://github.com/imjoseangel/terraform-azurerm-storage/actions/workflows/terraform.yml/badge.svg)](https://github.com/imjoseangel/terraform-azurerm-storage/actions/workflows/terraform.yml)
 
 ## Deploys a Azure Storage Account with versioning enabled, soft-delete capabilities and other security options
 
@@ -14,7 +14,7 @@ This Terraform module deploys a Storage Account on Azure.
 
 ```terraform
 module "storage" {
-  source = "github.com/visma-raet/terraform-azurerm-storage"
+  source = "github.com/imjoseangel/terraform-azurerm-storage"
 
   resource_group_name   = var.terraform_rsg
   create_resource_group = false
@@ -45,7 +45,7 @@ resource "azurerm_key_vault_secret" "storage" {
 
 ## Authors
 
-Originally created by [Visma-raet](http://github.com/visma-raet)
+Originally created by [imjoseangel](http://github.com/imjoseangel)
 
 ## License
 
