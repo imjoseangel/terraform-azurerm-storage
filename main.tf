@@ -41,8 +41,13 @@ resource "azurerm_storage_account" "main" {
   allow_blob_public_access  = var.enable_advanced_threat_protection == true ? true : false
   tags                      = var.tags
 
+  identity {
+    type         = var.identity_type
+    identity_ids = var.identity_ids
+  }
+
   blob_properties {
-    versioning_enabled = true
+    versioning_enabled = var.versioning_enabled
     delete_retention_policy {
       days = var.soft_delete_retention
     }
