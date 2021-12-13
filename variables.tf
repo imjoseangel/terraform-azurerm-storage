@@ -13,7 +13,7 @@ variable "location" {
   default     = "westeurope"
 }
 
-variable "storage_account_name" {
+variable "name" {
   description = "The name of the azure storage account"
   default     = ""
 }

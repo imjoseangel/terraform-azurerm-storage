@@ -29,8 +29,8 @@ resource "azurerm_resource_group" "rg" {
 # Storage Account Creation or selection
 #----------------------------------------------------------
 #tfsec:ignore:AZU012
-resource "azurerm_storage_account" "storeacc" {
-  name                      = var.storage_account_name
+resource "azurerm_storage_account" "main" {
+  name                      = lower(var.name)
   resource_group_name       = local.resource_group_name
   location                  = local.location
   account_kind              = var.account_kind
@@ -63,7 +63,7 @@ resource "azurerm_storage_account" "storeacc" {
 # Storage Advanced Threat Protection
 #--------------------------------------
 resource "azurerm_advanced_threat_protection" "atp" {
-  target_resource_id = azurerm_storage_account.storeacc.id
+  target_resource_id = azurerm_storage_account.main.id
   enabled            = var.enable_advanced_threat_protection
 }
 
@@ -73,7 +73,7 @@ resource "azurerm_advanced_threat_protection" "atp" {
 resource "azurerm_storage_container" "container" {
   count                 = length(var.containers_list)
   name                  = var.containers_list[count.index].name
-  storage_account_name  = azurerm_storage_account.storeacc.name
+  storage_account_name  = azurerm_storage_account.main.name
   container_access_type = var.containers_list[count.index].access_type
 }
 
@@ -83,7 +83,7 @@ resource "azurerm_storage_container" "container" {
 resource "azurerm_storage_share" "fileshare" {
   count                = length(var.file_shares)
   name                 = var.file_shares[count.index].name
-  storage_account_name = azurerm_storage_account.storeacc.name
+  storage_account_name = azurerm_storage_account.main.name
   quota                = var.file_shares[count.index].quota
 }
 
@@ -93,7 +93,7 @@ resource "azurerm_storage_share" "fileshare" {
 resource "azurerm_storage_table" "tables" {
   count                = length(var.tables)
   name                 = var.tables[count.index]
-  storage_account_name = azurerm_storage_account.storeacc.name
+  storage_account_name = azurerm_storage_account.main.name
 }
 
 #-------------------------------
@@ -102,7 +102,7 @@ resource "azurerm_storage_table" "tables" {
 resource "azurerm_storage_queue" "queues" {
   count                = length(var.queues)
   name                 = var.queues[count.index]
-  storage_account_name = azurerm_storage_account.storeacc.name
+  storage_account_name = azurerm_storage_account.main.name
 }
 
 #-------------------------------
@@ -110,7 +110,7 @@ resource "azurerm_storage_queue" "queues" {
 #-------------------------------
 resource "azurerm_storage_management_policy" "lcpolicy" {
   count              = length(var.lifecycles) == 0 ? 0 : 1
-  storage_account_id = azurerm_storage_account.storeacc.id
+  storage_account_id = azurerm_storage_account.main.id
 
   dynamic "rule" {
     for_each = var.lifecycles
