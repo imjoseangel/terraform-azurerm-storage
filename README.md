@@ -19,7 +19,7 @@ module "storage" {
   resource_group_name   = var.terraform_rsg
   create_resource_group = false
   location              = var.location
-  storage_account_name  = var.tf_name
+  name                  = var.tf_name
   skuname               = "Standard_ZRS"
 
   containers_list = [
