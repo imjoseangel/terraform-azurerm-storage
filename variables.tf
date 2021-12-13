@@ -108,3 +108,9 @@ variable "versioning_enabled" {
   type        = bool
   default     = true
 }
+
+variable "last_access_time_enabled" {
+  description = "(Optional) Is the last access time based tracking enabled? Default to true."
+  type        = bool
+  default     = true
+}

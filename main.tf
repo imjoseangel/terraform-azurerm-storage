@@ -47,7 +47,8 @@ resource "azurerm_storage_account" "main" {
   }
 
   blob_properties {
-    versioning_enabled = var.versioning_enabled
+    versioning_enabled       = var.versioning_enabled
+    last_access_time_enabled = var.last_access_time_enabled
     delete_retention_policy {
       days = var.soft_delete_retention
     }
