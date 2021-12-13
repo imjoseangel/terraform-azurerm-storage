@@ -97,7 +97,7 @@ variable "identity_type" {
   default     = "SystemAssigned"
 }
 
-variable "identity_ids " {
+variable "identity_ids" {
   description = "(Optional) A list of IDs for User Assigned Managed Identity resources to be assigned."
   type        = list(string)
   default     = []
