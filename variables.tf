@@ -100,7 +100,7 @@ variable "identity_type" {
 variable "identity_ids" {
   description = "(Optional) A list of IDs for User Assigned Managed Identity resources to be assigned."
   type        = list(string)
-  default     = []
+  default     = null
 }
 
 variable "versioning_enabled" {
