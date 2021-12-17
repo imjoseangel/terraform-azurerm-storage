@@ -25,6 +25,15 @@ resource "azurerm_resource_group" "rg" {
   tags     = merge({ "ResourceName" = format("%s", var.resource_group_name) }, var.tags, )
 }
 
+resource "azurerm_management_lock" "main" {
+  count      = var.create_resource_group ? 1 : 0
+  name       = "resource-group-level"
+  scope      = azurerm_resource_group.rg.id
+  lock_level = "CanNotDelete"
+  notes      = "This Resource Group is Read-Only"
+}
+
+
 #---------------------------------------------------------
 # Storage Account Creation or selection
 #----------------------------------------------------------
