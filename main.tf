@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_management_lock" "main" {
   count      = var.create_resource_group ? 1 : 0
   name       = "resource-group-level"
-  scope      = azurerm_resource_group.rg.id
+  scope      = azurerm_resource_group.rg[0].id
   lock_level = "CanNotDelete"
   notes      = "This Resource Group is Read-Only"
 }
