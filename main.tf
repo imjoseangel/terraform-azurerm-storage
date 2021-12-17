@@ -30,7 +30,7 @@ resource "azurerm_management_lock" "main" {
   name       = "resource-group-level"
   scope      = azurerm_resource_group.rg[0].id
   lock_level = "CanNotDelete"
-  notes      = "This Resource Group is Read-Only"
+  notes      = "This Resource Group Cannot be deleted"
 }
 
 
