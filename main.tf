@@ -86,6 +86,7 @@ resource "azurerm_advanced_threat_protection" "atp" {
 # Storage Container Creation
 #-------------------------------
 resource "azurerm_storage_container" "container" {
+  #ts:skip=accurics.azure.IAM.368 public container should be skipped for now.
   count                 = length(var.containers_list)
   name                  = var.containers_list[count.index].name
   storage_account_name  = azurerm_storage_account.main.name
