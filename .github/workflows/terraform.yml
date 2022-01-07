@@ -58,7 +58,7 @@ jobs:
     # Static code analyzer for Infrastructure as Code
     - name: Lint Code Base
       id: superlinter
-      uses: github/super-linter@v3
+      uses: github/super-linter@v4
       env:
         VALIDATE_ALL_CODEBASE: true
         DEFAULT_BRANCH: devel
