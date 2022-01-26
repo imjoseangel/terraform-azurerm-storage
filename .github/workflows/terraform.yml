@@ -65,6 +65,7 @@ jobs:
           DEFAULT_BRANCH: devel
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_TERRAFORM: true
+          YAML_CONFIG_FILE: .yamllint
 
       # Static code analyzer for Terrascan
       - name: Terraform Scan Code Base
