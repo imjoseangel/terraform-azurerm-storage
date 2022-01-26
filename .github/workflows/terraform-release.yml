@@ -13,46 +13,46 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Get current tag
-      id: currenttag
-      run: echo ::set-output name=tag::"${GITHUB_REF#refs/*/}"
+      - name: Get current tag
+        id: currenttag
+        run: echo ::set-output name=tag::"${GITHUB_REF#refs/*/}"
 
-    - name: Create Release
-      id: create_release
-      uses: ncipollo/release-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ steps.currenttag.outputs.tag }}
-        name: Release ${{ steps.currenttag.outputs.tag }}
-        body: |
-          # Terraform Module - Azurerm Storage Account
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.currenttag.outputs.tag }}
+          name: Release ${{ steps.currenttag.outputs.tag }}
+          body: |
+            # Terraform Module - Azurerm Storage Account
 
-          [![Terraform](https://github.com/imjoseangel/terraform-azurerm-storage/actions/workflows/terraform.yml/badge.svg)](https://github.com/imjoseangel/terraform-azurerm-storage/actions/workflows/terraform.yml)
+            [![Terraform](https://github.com/imjoseangel/terraform-azurerm-storage/actions/workflows/terraform.yml/badge.svg)](https://github.com/imjoseangel/terraform-azurerm-storage/actions/workflows/terraform.yml)
 
-          A [Terraform][2] module to deploys a Storage Account on Azure.
+            A [Terraform][2] module to deploys a Storage Account on Azure.
 
-          By [imjoseangel][3]
+            By [imjoseangel][3]
 
-          Use with:
-          ```bash
-          export ARM_CLIENT_ID=""
-          export ARM_CLIENT_SECRET=""
-          export ARM_SUBSCRIPTION_ID=""
-          export ARM_TENANT_ID=""
+            Use with:
+            ```bash
+            export ARM_CLIENT_ID=""
+            export ARM_CLIENT_SECRET=""
+            export ARM_SUBSCRIPTION_ID=""
+            export ARM_TENANT_ID=""
 
-          terraform init
-          terraform apply
-          ```
+            terraform init
+            terraform apply
+            ```
 
-          ## License
+            ## License
 
-          Licensed under [the MIT License][1].
+            Licensed under [the MIT License][1].
 
-          [1]: https://github.com/imjoseangel/terraform-azurerm-storage/blob/devel/LICENSE
-          [2]: https://www.terraform.io/
-          [3]: https://imjoseangel.eu/
-        draft: false
-        prerelease: false
+            [1]: https://github.com/imjoseangel/terraform-azurerm-storage/blob/devel/LICENSE
+            [2]: https://www.terraform.io/
+            [3]: https://imjoseangel.eu/
+          draft: false
+          prerelease: false
