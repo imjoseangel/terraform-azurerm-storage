@@ -39,16 +39,16 @@ resource "azurerm_management_lock" "main" {
 #----------------------------------------------------------
 #tfsec:ignore:AZU012
 resource "azurerm_storage_account" "main" {
-  name                      = lower(var.name)
-  resource_group_name       = local.resource_group_name
-  location                  = local.location
-  account_kind              = var.account_kind
-  account_tier              = local.account_tier
-  account_replication_type  = local.account_replication_type
-  min_tls_version           = "TLS1_2"
-  enable_https_traffic_only = true
-  allow_blob_public_access  = var.enable_advanced_threat_protection == true ? true : false
-  tags                      = var.tags
+  name                            = lower(var.name)
+  resource_group_name             = local.resource_group_name
+  location                        = local.location
+  account_kind                    = var.account_kind
+  account_tier                    = local.account_tier
+  account_replication_type        = local.account_replication_type
+  min_tls_version                 = "TLS1_2"
+  enable_https_traffic_only       = true
+  allow_nested_items_to_be_public = var.enable_advanced_threat_protection == true ? true : false
+  tags                            = var.tags
 
   identity {
     type         = var.identity_type
