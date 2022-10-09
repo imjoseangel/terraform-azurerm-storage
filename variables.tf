@@ -33,11 +33,6 @@ variable "skuname" {
   default     = "Standard_RAGRS"
 }
 
-variable "access_tier" {
-  description = "Defines the access tier for BlobStorage and StorageV2 accounts. Valid options are Hot and Cool."
-  type        = string
-  default     = "Hot"
-}
 variable "soft_delete_retention" {
   description = "Number of retention days for soft delete. If set to null it will disable soft delete all together."
   type        = number
